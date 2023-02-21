@@ -1,0 +1,7 @@
+{
+  "name": "SleepWatch",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
