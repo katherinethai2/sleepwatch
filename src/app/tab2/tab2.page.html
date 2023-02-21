@@ -7,20 +7,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" [scrollY]="false">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-content-scroll-host ion-padding">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Tab 2</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <ion-list>
     <ion-item *ngFor="let note of notes">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Sleep</ion-card-title>
+          <ion-card-title>Sleep Log</ion-card-title>
           <ion-card-subtitle>{{note.date}}</ion-card-subtitle>
         </ion-card-header>
-      
+        
         <ion-card-content>
           Time Fell Asleep: {{note.heart_rate_sleep}} <br>
           Time Woke Up: {{note.heart_rate_awake}} <br>
@@ -29,9 +29,9 @@
         </ion-card-content>
       </ion-card>
     </ion-item>
-  </ion-list>
+  </div>
 
   
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  
 </ion-content>
