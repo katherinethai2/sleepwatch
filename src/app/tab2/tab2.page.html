@@ -15,23 +15,21 @@
     </ion-header>
 
     <ion-item *ngFor="let note of notes">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Sleep Log</ion-card-title>
-          <ion-card-subtitle>{{note.date}}</ion-card-subtitle>
-        </ion-card-header>
-        
-        <ion-card-content>
-          Time Fell Asleep: {{note.heart_rate_sleep}} <br>
-          Time Woke Up: {{note.heart_rate_awake}} <br>
-          Calories Burned: {{note.calories_burned}} <br>
-          Step Count: {{note.step_count}} <br>
-        </ion-card-content>
-      </ion-card>
+      <div class="container">
+        <ion-card color="medium">
+          <ion-card-header>
+            <ion-card-title>Sleep Log</ion-card-title>
+            <ion-card-subtitle>{{note.date}}</ion-card-subtitle>
+          </ion-card-header>
+              
+          <ion-card-content>
+            Time Fell Asleep: {{note.heart_rate_sleep}} <br>
+            Time Woke Up: {{note.heart_rate_awake}} <br>
+            Calories Burned: {{note.calories_burned}} <br>
+            Step Count: {{note.step_count}} <br>
+          </ion-card-content>
+        </ion-card>   
+      </div>
     </ion-item>
   </div>
-
-  
-
-  
 </ion-content>
