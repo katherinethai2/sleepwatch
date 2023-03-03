@@ -30,15 +30,16 @@ export class Tab1Page {
 
   getRecommendation() {
     var i;
-    var smallestDifference = 0;
+    var smallestDifference = 1.797693134862315E+308;
     var difference = 0;
     var indexClosestToUser = 0;
     var additionalStepsNeeded = 0; 
 
-    for (i = 0; i < this.daily.length; i++) {
+    for (i = 1; i < this.daily.length; i++) {
       difference = Math.abs(parseInt(this.daily[i].LoggedActivitiesDistance) - parseInt(this.user[0].LoggedActivitiesDistance));
       difference += Math.abs(parseInt(this.daily[i].TrackerDistance) - parseInt(this.user[0].TrackerDistance));
 
+      
       if (difference < smallestDifference) {
         difference = smallestDifference;
         indexClosestToUser = i;
