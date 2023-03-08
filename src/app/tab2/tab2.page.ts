@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService, Note, User } from '../services/data.services';
+import { DataService, User8792009665 } from '../services/data.services';
 
 @Component({
   selector: 'app-tab2',
@@ -7,19 +7,14 @@ import { DataService, Note, User } from '../services/data.services';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
-  notes : Note[] = [];
-  user : User[] = [];
+  user8792009665 : User8792009665[] = [];
 
 
   constructor(private dataService: DataService) {
-    this.dataService.getNotes().subscribe(res => {
-      this.notes = res;
-    });
 
-    this.dataService.getUser().subscribe(res => {
+    this.dataService.getUser8792009665().subscribe(res => {
       console.log(res);
-      this.user = res;
+      this.user8792009665 = res;
     });
   }
 
