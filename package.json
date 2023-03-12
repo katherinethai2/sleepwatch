@@ -11,6 +11,12 @@
     "test": "ng test",
     "lint": "ng lint"
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "child_process": false
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "^15.0.0",
@@ -26,9 +32,17 @@
     "@capacitor/keyboard": "4.1.1",
     "@capacitor/status-bar": "4.1.1",
     "@ionic/angular": "^6.1.9",
+    "express": "^4.18.2",
     "ionicons": "^6.0.3",
+    "ngx-socket-io": "^4.4.0",
+    "python-shell": "^5.0.0",
+    "react": "^18.2.0",
     "rxjs": "~7.5.0",
+    "socket.io": "^4.6.1",
+    "stream": "^0.0.2",
     "tslib": "^2.3.0",
+    "util": "^0.12.5",
+    "ws": "^3.3.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -59,6 +73,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "react-error-overlay": "6.0.9",
     "ts-node": "~8.3.0",
     "typescript": "~4.8.4"
   },
