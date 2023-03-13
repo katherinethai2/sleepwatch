@@ -7,9 +7,7 @@ import * as child from 'child_process';
 
 import { HttpClient, } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-
-
+import { catchError, tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
@@ -83,15 +81,24 @@ export class Tab1Page implements OnInit {
         count += 1;
       }
 
+      console.log(this.scores);
 
+      this.http.post("http://127.0.0.1:8000/men/", this.scores).subscribe((res) => {
+        console.log(res);
+      })
       
     });
   }
   
   ngOnInit() {
-    this.obj = this.http.get("http://127.0.0.1:8000/men/").subscribe(
+
+    /*this.http.post("http://127.0.0.1:8000/men/", this.scores).subscribe((res) => {
+      console.log(res);
+    })*/
+
+    /*this.obj = this.http.get("http://127.0.0.1:8000/men/").subscribe(
       data => this.obj = data
-    )
+    )*/
   }
 
   async showToast(msg: string) {
