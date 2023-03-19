@@ -10,7 +10,7 @@ import { HttpClient, } from '@angular/common/http';
   styleUrls: ['tab2.page.scss']
 })
 
-export class Tab2Page implements OnInit {
+export class Tab2Page {
   user : User[] = [];
   totalStepsMean : any = null;
   totalStepsChi : any = null;
@@ -74,9 +74,10 @@ export class Tab2Page implements OnInit {
   sport1: any;
   sport2: any;
 
+  date: any;
+
   constructor(private dataService: DataService, private http: HttpClient, private navCtrl: NavController, private DataService:DataService) {
     this.dataService.getUser().subscribe(async res => {
-      //console.log(res);
       this.user = res;
       console.log(this.DataService.name);
 
@@ -98,10 +99,8 @@ export class Tab2Page implements OnInit {
         ]);
       }
 
-      console.log(this.scores);
-
       for (let j = 0; j < this.scores.length; ++j) {
-        console.log("NEW DAY " + this.user[j].date);
+        this.date = this.user[j].date;
         for (let i = 0; i < this.scores[j].length; ++i) {
           const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
@@ -120,230 +119,110 @@ export class Tab2Page implements OnInit {
               this.getSedentaryMinutesScore(parseInt(this.user[this.index].SedentaryMinutes_y) / 1440),
               this.getCaloriesScore(parseInt(this.user[this.index].Calories_x) / 1440),
               this.getStepTotalScore(parseInt(this.user[this.index].StepTotal) / 1440)];
+            
             console.log(i);
             console.log(this.data);
-            this.sendToBackend(this.data);
+            this.sendToBackend(this.data).then(() => this.getBackend());
+
           } else {
             this.data = [];
 
-            if ((parseInt(this.user[this.index].TotalSteps) / 2) != 0) {
-              this.data.push(this.getTotalStepsScore(parseInt(this.user[this.index].TotalSteps) / (1440 - (5 * i + this.random(500)))));
+            if ((parseInt(this.user[this.index].TotalSteps) / 1440) != 0) {
+              this.data.push(this.getTotalStepsScore(parseInt(this.user[this.index].TotalSteps) / (1440 - (5 * i))));
             } else {
-              this.data.push(this.getTotalStepsScore((parseInt(this.user[this.index].TotalSteps) / 2)));
+              this.data.push(this.getTotalStepsScore((parseInt(this.user[this.index].TotalSteps) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].TotalDistance) / 2) != 0) {
-              this.data.push(this.getTotalDistanceScore((parseInt(this.user[this.index].TotalDistance) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].TotalDistance) / 1440) != 0) {
+              this.data.push(this.getTotalDistanceScore((parseInt(this.user[this.index].TotalDistance) / (1440 - (5 * i)))));
             } else {
               this.data.push(this.getTotalDistanceScore(parseInt(this.user[this.index].TotalDistance) / 2));
             }
 
-            if ((parseInt(this.user[this.index].TrackerDistance) / 2) != 0) {
-              this.data.push(this.getTrackerDistanceScore((parseInt(this.user[this.index].TrackerDistance) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].TrackerDistance) / 1440) != 0) {
+              this.data.push(this.getTrackerDistanceScore((parseInt(this.user[this.index].TrackerDistance) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getTrackerDistanceScore((parseInt(this.user[this.index].TrackerDistance) / 2)));
+              this.data.push(this.getTrackerDistanceScore((parseInt(this.user[this.index].TrackerDistance) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].LoggedActivitiesDistance) / 2) != 0) {
-              this.data.push(this.getLoggedActivitiesDistanceScore((parseInt(this.user[this.index].LoggedActivitiesDistance) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].LoggedActivitiesDistance) / 1440) != 0) {
+              this.data.push(this.getLoggedActivitiesDistanceScore((parseInt(this.user[this.index].LoggedActivitiesDistance) / (1440 - (5 * i )))));
             } else {
-              this.data.push(this.getLoggedActivitiesDistanceScore((parseInt(this.user[this.index].LoggedActivitiesDistance) / 2)));
+              this.data.push(this.getLoggedActivitiesDistanceScore((parseInt(this.user[this.index].LoggedActivitiesDistance) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].VeryActiveDistance_x) / 2) != 0) {
-              this.data.push(this.getVeryActiveDistanceScore((parseInt(this.user[this.index].VeryActiveDistance_x) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].VeryActiveDistance_x) / 1440) != 0) {
+              this.data.push(this.getVeryActiveDistanceScore((parseInt(this.user[this.index].VeryActiveDistance_x) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getVeryActiveDistanceScore((parseInt(this.user[this.index].VeryActiveDistance_x) / 2)));
+              this.data.push(this.getVeryActiveDistanceScore((parseInt(this.user[this.index].VeryActiveDistance_x) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].ModeratelyActiveDistance_x) / 2) != 0) {
-              this.data.push(this.getModeratelyActiveDistanceScore((parseInt(this.user[this.index].ModeratelyActiveDistance_x) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].ModeratelyActiveDistance_x) / 1440) != 0) {
+              this.data.push(this.getModeratelyActiveDistanceScore((parseInt(this.user[this.index].ModeratelyActiveDistance_x) / (1440 - (5 * i )))));
             } else {
-              this.data.push(this.getModeratelyActiveDistanceScore((parseInt(this.user[this.index].ModeratelyActiveDistance_x) / 2)));
+              this.data.push(this.getModeratelyActiveDistanceScore((parseInt(this.user[this.index].ModeratelyActiveDistance_x) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].LightActiveDistance_x) / 2) != 0) {
-              this.data.push(this.getLightActiveDistanceScore((parseInt(this.user[this.index].LightActiveDistance_x) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].LightActiveDistance_x) / 1440) != 0) {
+              this.data.push(this.getLightActiveDistanceScore((parseInt(this.user[this.index].LightActiveDistance_x) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getLightActiveDistanceScore((parseInt(this.user[this.index].LightActiveDistance_x) / 2)));
+              this.data.push(this.getLightActiveDistanceScore((parseInt(this.user[this.index].LightActiveDistance_x) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].SedentaryActiveDistance_x) / 2) != 0) {
-              this.data.push(this.getSedentaryActiveDistanceScore((parseInt(this.user[this.index].SedentaryActiveDistance_x) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].SedentaryActiveDistance_x) / 1440) != 0) {
+              this.data.push(this.getSedentaryActiveDistanceScore((parseInt(this.user[this.index].SedentaryActiveDistance_x) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getSedentaryActiveDistanceScore((parseInt(this.user[this.index].SedentaryActiveDistance_x) / 2)));
+              this.data.push(this.getSedentaryActiveDistanceScore((parseInt(this.user[this.index].SedentaryActiveDistance_x) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].VeryActiveMinutes_x) / 2) != 0) {
-              this.data.push(this.getVeryActiveMinutesScore((parseInt(this.user[this.index].VeryActiveMinutes_x) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].VeryActiveMinutes_x) / 1440) != 0) {
+              this.data.push(this.getVeryActiveMinutesScore((parseInt(this.user[this.index].VeryActiveMinutes_x) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getVeryActiveMinutesScore((parseInt(this.user[this.index].VeryActiveMinutes_x) / 2)));
+              this.data.push(this.getVeryActiveMinutesScore((parseInt(this.user[this.index].VeryActiveMinutes_x) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].FairlyActiveMinutes_y) / 2) != 0) {
-              this.data.push(this.getFairlyActiveMinutesScore((parseInt(this.user[this.index].FairlyActiveMinutes_y) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].FairlyActiveMinutes_y) / 1440) != 0) {
+              this.data.push(this.getFairlyActiveMinutesScore((parseInt(this.user[this.index].FairlyActiveMinutes_y) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getFairlyActiveMinutesScore((parseInt(this.user[this.index].FairlyActiveMinutes_y) / 2)));
+              this.data.push(this.getFairlyActiveMinutesScore((parseInt(this.user[this.index].FairlyActiveMinutes_y) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].LightlyActiveMinutes_y) / 2) != 0) {
-              this.data.push(this.getLightlyActiveMinutesScore((parseInt(this.user[this.index].LightlyActiveMinutes_y) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].LightlyActiveMinutes_y) / 1440) != 0) {
+              this.data.push(this.getLightlyActiveMinutesScore((parseInt(this.user[this.index].LightlyActiveMinutes_y) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getLightlyActiveMinutesScore((parseInt(this.user[this.index].LightlyActiveMinutes_y) / 2)));
+              this.data.push(this.getLightlyActiveMinutesScore((parseInt(this.user[this.index].LightlyActiveMinutes_y) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].SedentaryMinutes_y) / 2) != 0) {
-              this.data.push(this.getSedentaryMinutesScore((parseInt(this.user[this.index].SedentaryMinutes_y) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].SedentaryMinutes_y) / 1440) != 0) {
+              this.data.push(this.getSedentaryMinutesScore((parseInt(this.user[this.index].SedentaryMinutes_y) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getSedentaryMinutesScore((parseInt(this.user[this.index].SedentaryMinutes_y) / 2)));
+              this.data.push(this.getSedentaryMinutesScore((parseInt(this.user[this.index].SedentaryMinutes_y) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].Calories_x) / 2) != 0) {
-              this.data.push(this.getCaloriesScore((parseInt(this.user[this.index].Calories_x) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].Calories_x) / 1440) != 0) {
+              this.data.push(this.getCaloriesScore((parseInt(this.user[this.index].Calories_x) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getCaloriesScore((parseInt(this.user[this.index].Calories_x) / 2)));
+              this.data.push(this.getCaloriesScore((parseInt(this.user[this.index].Calories_x) / 1440)));
             }
 
-            if ((parseInt(this.user[this.index].StepTotal) / 2) != 0) {
-              this.data.push(this.getStepTotalScore((parseInt(this.user[this.index].StepTotal) / (1440 - (5 * i + this.random(500))))));
+            if ((parseInt(this.user[this.index].StepTotal) / 1440) != 0) {
+              this.data.push(this.getStepTotalScore((parseInt(this.user[this.index].StepTotal) / (1440 - (5 * i)))));
             } else {
-              this.data.push(this.getStepTotalScore((parseInt(this.user[this.index].StepTotal) / 2)));
+              this.data.push(this.getStepTotalScore((parseInt(this.user[this.index].StepTotal) / 1440)));
             }
 
-            await sleep(10000); // 10 seconds right now
+            await sleep(5000); // should be 5 minutes to sleep but 5 seconds to mimic 5 minutes for demo
+            
             console.log(i);
             console.log(this.data);
-            this.sendToBackend(this.data);
-            console.log("recommendation");
-            console.log(this.recommendation);
-            console.log("feature");
-            this.feature0 = this.getFeature(this.recommendation['return'][0]['features'][0]['feature']);
-            this.feature1 = this.getFeature(this.recommendation['return'][0]['features'][1]['feature']);
-            this.feature2 = this.getFeature(this.recommendation['return'][0]['features'][2]['feature']);
-            this.feature3 = this.getFeature(this.recommendation['return'][0]['features'][3]['feature']);
-            this.feature4 = this.getFeature(this.recommendation['return'][0]['features'][4]['feature']);
-
-            this.increase0 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][0]['increase']);
-            this.increase1 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][1]['increase']);
-            this.increase2 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][2]['increase']);
-            this.increase3 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][3]['increase']);
-            this.increase4 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][4]['increase']);
-
-            this.sport0 = this.getSport(this.recommendation['return'][0]['spots'][0]['spot']);
-            this.sport1 = this.getSport(this.recommendation['return'][0]['spots'][1]['spot']);
-            this.sport2 = this.getSport(this.recommendation['return'][0]['spots'][2]['spot']);
+            this.sendToBackend(this.data).then(() => this.getBackend());
           }
         }
       }
     });
   }
-
-  async sendToBackend(data:any) {
-    this.http.post("http://127.0.0.1:8000/men/", data).subscribe((res) => {
-      console.log("result");
-      this.recommendation = res;
-      console.log(res);
-    })
-
-    /*this.obj = await this.http.get("http://127.0.0.1:8000/men/").subscribe(
-      data => this.obj = data
-    )
-
-    console.log(new Date().toLocaleString());*/
-
-  }
-
-  ngOnInit() {
-    /*this.obj = this.http.get("http://127.0.0.1:8000/men/").subscribe(
-      data => this.obj = data
-    )*/
-
-    /*this.http.post("http://127.0.0.1:8000/men/", this.scores).subscribe((res) => {
-      console.log(res);
-    })*/
-  }
-
-
-  async showToast(msg: string) {
-    /*let toast = await this.toastCtrl.create({
-      message: msg,
-      position: 'top',
-      duration: 2000
-    });
-    toast.present();*/
-  }
-
-  random(max: number) {
-    return Math.floor(Math.random() * max);
-  }
-
-  getFeature(feature: any) {
-    if (feature == "TotalSteps") {
-      return "Total Steps";
-    } else if (feature == "TotalDistance") {
-      return "Total Distance";
-    } else if (feature == "TrackerDistance")  {
-      return "Tracker Distance";
-    } else if (feature == "LoggedActivitiesDistance") {
-      return "Logged Activites Distance";
-    } else if (feature == "VeryActiveDistance") {
-      return "Very Active Distance";
-    } else if (feature == "ModeratelyActiveDistance") {
-      return "Moderately Active Distance";
-    } else if (feature == "LightActiveDistance") {
-      return "Light Active Distance";
-    } else if (feature == "SedentaryActiveDistance") {
-      return "Sedentary Active Distance";
-    } else if (feature == "VeryActiveMinutes") {
-      return "Very Active Minutes";
-    } else if (feature == "Calories") {
-      return "Calories";
-    } else if (feature == "SedentaryMinutes") {
-      return "Sedentary Minutes";
-    } else if (feature == "LightlyActiveMinutes") {
-      return "Lightly Active Minutes";
-    } else if (feature == "FairlyActiveMinutes") {
-      return "Fairly Active Minutes";
-    } else if (feature == "StepTotal") {
-      return "Step Total";
-    }
-
-    return "ERROR feature " + feature;
-  }
-
-  getIncreaseOrDecrease(increase:any) {
-    if (increase == true) {
-      return "Increase";
-    } else if (increase == false) {
-      return "Decrease";
-    }
-
-    return "ERROR increase " + increase;
-  }
-
-  getSport(sport: any) {
-    if (sport == "running") {
-      return "Run";
-    } else if (sport == "walking slowly") {
-      return "Walk Slowly";
-    } else if (sport == "walking brisk") {
-      return "Walk Briskly";
-    } else if (sport == "bicycling") {
-      return "Bike";
-    } else if (sport == "sitting") {
-      return "Sit";
-    } else if (sport == "fishing") {
-      return "Fish";
-    } else if (sport == "hiking") {
-      return "Hike";
-    } else if (sport == "basketball") {
-      return "Basketball";
-    }
-    
-    return "ERROR sport " + sport;
-  }
   
-
+  // calculations
   getTotalStepsScore(x: any) {
     if (x == undefined) {
       return this.totalStepsMean;
@@ -707,13 +586,104 @@ export class Tab2Page implements OnInit {
       return x - this.stepTotalMean;
     }
   }
-  
 
-  getRecommendation() {
-    return 0
+  // send to backend
+  async sendToBackend(data:any) {
+    this.http.post("http://127.0.0.1:8000/data/", data).subscribe((res) => {
+    })
   }
 
-  getID() {
-    this.dataService.setID(this.id);
+  async getBackend() {
+    await this.http.get("http://127.0.0.1:8000/data/").subscribe((res) => {
+      this.recommendation = res;
+
+      if (this.recommendation != undefined) {
+        console.log("recommendation");
+        console.log(this.recommendation);
+        
+        this.feature0 = this.getFeature(this.recommendation['return'][0]['features'][0]['feature']);
+        this.feature1 = this.getFeature(this.recommendation['return'][0]['features'][1]['feature']);
+        this.feature2 = this.getFeature(this.recommendation['return'][0]['features'][2]['feature']);
+        this.feature3 = this.getFeature(this.recommendation['return'][0]['features'][3]['feature']);
+        this.feature4 = this.getFeature(this.recommendation['return'][0]['features'][4]['feature']);
+
+        this.increase0 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][0]['increase']);
+        this.increase1 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][1]['increase']);
+        this.increase2 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][2]['increase']);
+        this.increase3 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][3]['increase']);
+        this.increase4 = this.getIncreaseOrDecrease(this.recommendation['return'][0]['features'][4]['increase']);
+
+        this.sport0 = this.getSport(this.recommendation['return'][0]['spots'][0]['spot']);
+        this.sport1 = this.getSport(this.recommendation['return'][0]['spots'][1]['spot']);
+        this.sport2 = this.getSport(this.recommendation['return'][0]['spots'][2]['spot']);
+      }
+    });
+  }
+
+  // display results
+  getFeature(feature: any) {
+    if (feature == "TotalSteps") {
+      return "Total Steps";
+    } else if (feature == "TotalDistance") {
+      return "Total Distance";
+    } else if (feature == "TrackerDistance")  {
+      return "Tracker Distance";
+    } else if (feature == "LoggedActivitiesDistance") {
+      return "Logged Activites Distance";
+    } else if (feature == "VeryActiveDistance") {
+      return "Very Active Distance";
+    } else if (feature == "ModeratelyActiveDistance") {
+      return "Moderately Active Distance";
+    } else if (feature == "LightActiveDistance") {
+      return "Light Active Distance";
+    } else if (feature == "SedentaryActiveDistance") {
+      return "Sedentary Active Distance";
+    } else if (feature == "VeryActiveMinutes") {
+      return "Very Active Minutes";
+    } else if (feature == "Calories") {
+      return "Calories";
+    } else if (feature == "SedentaryMinutes") {
+      return "Sedentary Minutes";
+    } else if (feature == "LightlyActiveMinutes") {
+      return "Lightly Active Minutes";
+    } else if (feature == "FairlyActiveMinutes") {
+      return "Fairly Active Minutes";
+    } else if (feature == "StepTotal") {
+      return "Step Total";
+    }
+
+    return "ERROR feature " + feature;
+  }
+
+  getIncreaseOrDecrease(increase:any) {
+    if (increase == true) {
+      return "Increase";
+    } else if (increase == false) {
+      return "Decrease";
+    }
+
+    return "ERROR increase " + increase;
+  }
+
+  getSport(sport: any) {
+    if (sport == "running") {
+      return "Run";
+    } else if (sport == "walking slowly") {
+      return "Walk Slowly";
+    } else if (sport == "walking brisk") {
+      return "Walk Briskly";
+    } else if (sport == "bicycling") {
+      return "Bike";
+    } else if (sport == "sitting") {
+      return "Sit";
+    } else if (sport == "fishing") {
+      return "Fish";
+    } else if (sport == "hiking") {
+      return "Hike";
+    } else if (sport == "basketball") {
+      return "Basketball";
+    }
+    
+    return "ERROR sport " + sport;
   }
 }

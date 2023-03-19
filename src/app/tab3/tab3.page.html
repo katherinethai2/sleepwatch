@@ -8,15 +8,8 @@
 
 <ion-content [fullscreen]="true" [scrollY]="false">
   <div class="ion-content-scroll-host ion-padding">
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">Tab 2</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-item *ngFor="let u of user">
-      <div class="container">
-        <ion-card color="light">
+    <ion-item lines="none" color="none" *ngFor="let u of user">
+        <ion-card>
           <ion-card-header>
             <ion-card-title>User Data</ion-card-title>
             <ion-card-subtitle>{{u.date}}</ion-card-subtitle>
@@ -49,11 +42,6 @@
           </ion-card-content>
               
         </ion-card>   
-      </div>
     </ion-item>
-
-    
-
-    
   </div>
 </ion-content>

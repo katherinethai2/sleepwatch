@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Home
+      Recommendations
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,11 +9,14 @@
 <ion-content [fullscreen]="true" [scrollY]="false">
   <div class="ion-content-scroll-host ion-padding">
     <ion-grid>
-      <ion-row> 
+      <ion-row>
         <ion-col col-12>
-          <ion-avatar class="image-center">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
+          <ion-card padding>
+            <ion-card-header>
+              <ion-card-title>Date</ion-card-title>
+              <ion-card-subtitle>{{date}}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
         </ion-col>
       </ion-row>
       <ion-row>
