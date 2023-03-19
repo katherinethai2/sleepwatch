@@ -1,17 +1,59 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar item-align="center">
     <ion-title>
-      Search
+      Sleep Data
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" [scrollY]="false">
+  <div class="ion-content-scroll-host ion-padding">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Tab 2</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <ion-searchbar show-clear-button="always" value="Always Show"></ion-searchbar>
+    <ion-item *ngFor="let u of user">
+      <div class="container">
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title>User Data</ion-card-title>
+            <ion-card-subtitle>{{u.date}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <b>Total Steps:</b> {{u.TotalSteps}} <br>
+            <b>Total Distance:</b> {{u.TotalDistance}} <br>
+            <b>Tracker Distance:</b> {{u.TrackerDistance}} <br>
+            <b>Logged Activities Distance:</b> {{u.LoggedActivitiesDistance}} <br>
+            <b>Very Active Distance_x:</b> {{u.VeryActiveDistance_x}} <br>
+            <b>Moderately Active Distance_x:</b> {{u.ModeratelyActiveDistance_x}} <br>
+            <b>Light Active Distance_x:</b> {{u.LightActiveDistance_x}} <br>
+            <b>Sedentary Active Distance_x:</b> {{u.SedentaryActiveDistance_x}} <br>
+            <b>Very Active Minutes_x:</b> {{u.VeryActiveDistance_x}} <br>
+            <b>Calories_x:</b> {{u.Calories_x}} <br>
+            <b>Calories_y:</b> {{u.Calories_y}} <br>
+            <b>Sedentary Minutes_y:</b> {{u.SedentaryMinutes_y}} <br>
+            <b>Lightly Active Minutes_y:</b> {{u.LightlyActiveMinutes_y}} <br>
+            <b>Fairly Active Minutes_y:</b> {{u.FairlyActiveMinutes_y}} <br>
+            <b>Very Active Minutes_y:</b> {{u.VeryActiveMinutes_y}} <br>
+            <b>Sedentary Active Distance_y:</b> {{u.SedentaryActiveDistance_y}} <br>
+            <b>Light Active Distance_y:</b> {{u.LightActiveDistance_y}} <br>
+            <b>Moderately Active Distance_y:</b> {{u.ModeratelyActiveDistance_y}} <br>
+            <b>Very Active Distance_y:</b> {{u.VeryActiveDistance_y}} <br>
+            <b>Step Total:</b> {{u.StepTotal}} <br>
+            <b>Total Sleep Records:</b> {{u.TotalSleepRecords}} <br>
+            <b>Total Minutes Asleep:</b> {{u.TotalMinutesAsleep}} <br>
+            <b>Total Time In Bed:</b> {{u.TotalTimeInBed}} <br>
+          </ion-card-content>
+              
+        </ion-card>   
+      </div>
+    </ion-item>
+
+    
+
+    
+  </div>
 </ion-content>

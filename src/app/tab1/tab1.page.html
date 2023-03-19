@@ -18,18 +18,13 @@
     <ion-row>
       <ion-col col-12>
         <ion-card padding>
-          <h2>Home</h2>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <ion-card padding>
-          <h2>{{getRecommendation()}} More Steps Recommended</h2>
+          <ion-item>
+            <ion-label>ID Number</ion-label>
+            <ion-input type="text" [(ngModel)]="id" placeholder="Enter ID"></ion-input>
+          </ion-item>
+          <ion-button (click)="getID()">Default</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <h3>{{obj|json}}</h3>
 </ion-content>

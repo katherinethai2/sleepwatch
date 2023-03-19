@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Firestore, collectionData, docData, addDoc, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { Observable } from 'rxjs';
+import { Tab1Page } from '../tab1/tab1.page';
 
-export interface User8792009665 {
+export interface User{
     id?: string;
     date: string;
     TotalSteps: string;
@@ -35,30 +36,39 @@ export interface User8792009665 {
     providedIn: 'root'
 })
 export class DataService {
-    constructor(private firestore: Firestore) {}
+    name:string = '';
 
-    getUser8792009665(): Observable<User8792009665[]>{ 
-        const user8792009665Ref = collection(this.firestore, 'user8792009665');
-        return collectionData(user8792009665Ref, { idField: 'id'}) as Observable<User8792009665[]>; 
+    constructor(private firestore: Firestore) {
     }
 
-    getUser8792009665ById(id: User8792009665): Observable<User8792009665> {
-        const user8792009665DocRef = doc(this.firestore, 'user8792009665/${id}');
-        return docData(user8792009665DocRef, { idField: 'id' }) as Observable<User8792009665>;
+    getUser(): Observable<User[]>{ 
+        const userRef = collection(this.firestore, this.name);
+        return collectionData(userRef, { idField: 'id'}) as Observable<User[]>; 
     }
 
-    addUser8792009665(user8792009665: User8792009665) {
-        const user8792009665Ref = collection(this.firestore, 'user8792009665');
-        return addDoc(user8792009665Ref, user8792009665);
+    getUserById(id: User): Observable<User> {
+        const userDocRef = doc(this.firestore,  this.name += '/${id}');
+        return docData(userDocRef, { idField: 'id' }) as Observable<User>;
     }
 
-    deleteUser8792009665(user8792009665: User8792009665) {
-        const user8792009665DocRef = doc(this.firestore, 'user8792009665/${user8792009665.id');
-        return deleteDoc(user8792009665DocRef);
+    /*
+    addUser(user: User) {
+        const userRef = collection(this.firestore, 'user8792009665');
+        return addDoc(userRef, user);
     }
 
-    updateUser8792009665(user8792009665: User8792009665) {
-        const user8792009665DocRef = doc(this.firestore, 'user8792009665/${user8792009665.id}');
-        return updateDoc(user8792009665DocRef, { date: user8792009665.date, TotalSteps: user8792009665.TotalSteps, TotalDistance: user8792009665.TotalDistance, TrackerDistance: user8792009665.TrackerDistance, LoggedActivitiesDistance: user8792009665.LoggedActivitiesDistance, VeryActiveDistance_x: user8792009665.VeryActiveDistance_x, ModeratelyActiveDistance_x: user8792009665.ModeratelyActiveDistance_x, LightActiveDistance_x: user8792009665.LightActiveDistance_x, SedentaryActiveDistance_x: user8792009665.SedentaryActiveDistance_x, VeryActiveMinutes_x: user8792009665.VeryActiveMinutes_x, Calories_x: user8792009665.Calories_x, Calories_y: user8792009665.Calories_y, SedentaryMinutes_y: user8792009665.SedentaryMinutes_y, LightlyActiveMinutes_y: user8792009665.LightlyActiveMinutes_y, FairlyActiveMinutes_y: user8792009665.FairlyActiveMinutes_y, VeryActiveMinutes_y: user8792009665.VeryActiveMinutes_y, SedentaryActiveDistance_y: user8792009665.SedentaryActiveDistance_y, LightActiveDistance_y: user8792009665.LightActiveDistance_y, ModeratelyActiveDistance_y: user8792009665.ModeratelyActiveDistance_y, VeryActiveDistance_y: user8792009665.VeryActiveDistance_y, StepTotal: user8792009665.StepTotal, TotalSleepRecords: user8792009665.TotalSleepRecords, TotalMinutesAsleep: user8792009665.TotalMinutesAsleep, TotalTimeInBed: user8792009665.TotalTimeInBed  });
+    deleteUser(user: User) {
+        const userDocRef = doc(this.firestore, 'user8792009665/${user8792009665.id');
+        return deleteDoc(userDocRef);
+    }
+
+    updateUser(user: User) {
+        const userDocRef = doc(this.firestore, 'user8792009665/${user8792009665.id}');
+        return updateDoc(userDocRef, { date: user.date, TotalSteps: user.TotalSteps, TotalDistance: user.TotalDistance, TrackerDistance: user.TrackerDistance, LoggedActivitiesDistance: user.LoggedActivitiesDistance, VeryActiveDistance_x: user.VeryActiveDistance_x, ModeratelyActiveDistance_x: user.ModeratelyActiveDistance_x, LightActiveDistance_x: user.LightActiveDistance_x, SedentaryActiveDistance_x: user.SedentaryActiveDistance_x, VeryActiveMinutes_x: user.VeryActiveMinutes_x, Calories_x: user.Calories_x, Calories_y: user.Calories_y, SedentaryMinutes_y: user.SedentaryMinutes_y, LightlyActiveMinutes_y: user.LightlyActiveMinutes_y, FairlyActiveMinutes_y: user.FairlyActiveMinutes_y, VeryActiveMinutes_y: user.VeryActiveMinutes_y, SedentaryActiveDistance_y: user.SedentaryActiveDistance_y, LightActiveDistance_y: user.LightActiveDistance_y, ModeratelyActiveDistance_y: user.ModeratelyActiveDistance_y, VeryActiveDistance_y: user.VeryActiveDistance_y, StepTotal: user.StepTotal, TotalSleepRecords: user.TotalSleepRecords, TotalMinutesAsleep: user.TotalMinutesAsleep, TotalTimeInBed: user.TotalTimeInBed  });
+    }*/
+
+    setID(id: any) {
+        this.name = "user" + id;
+        alert(this.name);
     }
 }

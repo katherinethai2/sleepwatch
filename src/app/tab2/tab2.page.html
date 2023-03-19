@@ -1,59 +1,55 @@
 <ion-header [translucent]="true">
-  <ion-toolbar item-align="center">
+  <ion-toolbar>
     <ion-title>
-      Sleep Data
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" [scrollY]="false">
   <div class="ion-content-scroll-host ion-padding">
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">Tab 2</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-item *ngFor="let u of user8792009665">
-      <div class="container">
-        <ion-card color="light">
-          <ion-card-header>
-            <ion-card-title>User Data</ion-card-title>
-            <ion-card-subtitle>{{u.date}}</ion-card-subtitle>
-          </ion-card-header>
-
-          <ion-card-content>
-            <b>Total Steps:</b> {{u.TotalSteps}} <br>
-            <b>Total Distance:</b> {{u.TotalDistance}} <br>
-            <b>Tracker Distance:</b> {{u.TrackerDistance}} <br>
-            <b>Logged Activities Distance:</b> {{u.LoggedActivitiesDistance}} <br>
-            <b>Very Active Distance_x:</b> {{u.VeryActiveDistance_x}} <br>
-            <b>Moderately Active Distance_x:</b> {{u.ModeratelyActiveDistance_x}} <br>
-            <b>Light Active Distance_x:</b> {{u.LightActiveDistance_x}} <br>
-            <b>Sedentary Active Distance_x:</b> {{u.SedentaryActiveDistance_x}} <br>
-            <b>Very Active Minutes_x:</b> {{u.VeryActiveDistance_x}} <br>
-            <b>Calories_x:</b> {{u.Calories_x}} <br>
-            <b>Calories_y:</b> {{u.Calories_y}} <br>
-            <b>Sedentary Minutes_y:</b> {{u.SedentaryMinutes_y}} <br>
-            <b>Lightly Active Minutes_y:</b> {{u.LightlyActiveMinutes_y}} <br>
-            <b>Fairly Active Minutes_y:</b> {{u.FairlyActiveMinutes_y}} <br>
-            <b>Very Active Minutes_y:</b> {{u.VeryActiveMinutes_y}} <br>
-            <b>Sedentary Active Distance_y:</b> {{u.SedentaryActiveDistance_y}} <br>
-            <b>Light Active Distance_y:</b> {{u.LightActiveDistance_y}} <br>
-            <b>Moderately Active Distance_y:</b> {{u.ModeratelyActiveDistance_y}} <br>
-            <b>Very Active Distance_y:</b> {{u.VeryActiveDistance_y}} <br>
-            <b>Step Total:</b> {{u.StepTotal}} <br>
-            <b>Total Sleep Records:</b> {{u.TotalSleepRecords}} <br>
-            <b>Total Minutes Asleep:</b> {{u.TotalMinutesAsleep}} <br>
-            <b>Total Time In Bed:</b> {{u.TotalTimeInBed}} <br>
-          </ion-card-content>
-              
-        </ion-card>   
-      </div>
-    </ion-item>
-
-    
-
-    
+    <ion-grid>
+      <ion-row> 
+        <ion-col col-12>
+          <ion-avatar class="image-center">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card padding>
+            <ion-card-header>
+              <ion-card-title>Activites</ion-card-title>
+              <ion-card-subtitle>Recommended Actitivites</ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              1. {{increase0}} {{feature0}} <br>
+              2. {{increase1}} {{feature1}} <br>
+              3. {{increase2}} {{feature2}} <br>
+              4. {{increase3}} {{feature3}} <br>
+              5. {{increase4}} {{feature4}} <br>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-card padding>
+            <ion-card-header>
+              <ion-card-title>Sports</ion-card-title>
+              <ion-card-subtitle>Suggested Sports Based on Recommended Activites</ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              1. {{sport0}} <br>
+              2. {{sport1}} <br>
+              3. {{sport2}} <br>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

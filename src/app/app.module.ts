@@ -13,6 +13,7 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { FormsModule } from '@angular/forms';
 const config: SocketIoConfig = { url: 'http://localhost:8100', options: {} };
 
 
@@ -26,7 +27,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8100', options: {} };
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
