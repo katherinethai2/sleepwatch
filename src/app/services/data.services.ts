@@ -69,6 +69,5 @@ export class DataService {
 
     setID(id: any) {
         this.name = "user" + id;
-        alert(this.name);
     }
 }
